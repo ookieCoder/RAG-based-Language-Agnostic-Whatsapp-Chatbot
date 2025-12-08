@@ -21,8 +21,8 @@ This project is a multilingual WhatsApp Chatbot that uses Retrieval-Augmented Ge
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
-    cd <your-repo-folder>
+    git clone https://github.com/ookieCoder/RAG-based-Language-Agnostic-Whatsapp-Chatbot.git
+    cd RAG-based-Language-Agnostic-Whatsapp-Chatbot
     ```
 
 2.  **Install dependencies:**
@@ -31,14 +31,11 @@ This project is a multilingual WhatsApp Chatbot that uses Retrieval-Augmented Ge
     ```
 
 3.  **Set up Environment Variables:**
-    Create a `.env` file in the root directory (you can copy `.env.example`):
-    ```bash
-    cp .env.example .env
-    ```
+    Create a `.env` file in the root directory
+    
     Fill in your API keys and tokens in `.env`:
     ```env
-    GROQ_API_KEY=your_groq_api_key
-    GROQ_TRANSLATE_API_KEY=your_groq_translate_api_key # Can be the same as above
+    API_KEY=your_api_key
     ACCESS_TOKEN=your_whatsapp_access_token
     VERIFY_TOKEN=your_custom_verify_token
     ```
