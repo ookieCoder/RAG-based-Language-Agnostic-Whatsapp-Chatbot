@@ -1,0 +1,14 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Vector Store (too large and local)
+vector_store/
+processed_files.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
