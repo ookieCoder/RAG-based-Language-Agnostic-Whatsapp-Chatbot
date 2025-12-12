@@ -19,7 +19,7 @@ vectordb = Chroma(
     embedding_function=embeddings
 )
 
-# Utility: Compute file hash (for detecting updates)
+# Compute file hash (for detecting updates)
 def compute_file_hash(filepath):
     hasher = hashlib.md5()
     with open(filepath, "rb") as f:
@@ -27,7 +27,7 @@ def compute_file_hash(filepath):
         hasher.update(buf)
     return hasher.hexdigest()
 
-# Step 1: Load already processed file hashes
+# Load already processed file hashes
 def load_processed_files():
     if os.path.exists(PROCESSED_FILE):
         with open(PROCESSED_FILE, "r") as f:
@@ -38,9 +38,7 @@ def load_processed_files():
             return json.loads(content)
     return {}
 
-# -------------------------------------------------------
-# Step 3: Find new or modified files
-# -------------------------------------------------------
+# Find new or modified files
 def get_new_files():
     processed = load_processed_files()
     current_files = {}
@@ -61,9 +59,7 @@ def get_new_files():
     return new_files, processed, current_files
 
 
-# -------------------------------------------------------
-# Step 4: Embed only new files and add to ChromaDB
-# -------------------------------------------------------
+# Embed only new files and add to ChromaDB
 def update_vector_store():
     new_files, old_records, new_records = get_new_files()
 
@@ -115,7 +111,6 @@ def update_vector_store():
     )
     chunks = splitter.split_documents(docs)
     vectordb.add_documents(chunks)
-    # vectordb.persist()
 
     # Update record
     old_records.update(new_records)
