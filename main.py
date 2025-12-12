@@ -1,6 +1,3 @@
-# ================================
-# Language-Agnostic Chatbot (Terminal Prototype)
-# ================================
 from langchain_chroma.vectorstores import Chroma
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -11,7 +8,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langdetect import detect
 from sentence_transformers import CrossEncoder
-# print("Imports successful!")
 
 load_dotenv()
 
@@ -21,9 +17,7 @@ llm_translate = ChatGroq(api_key=GROQ_TRANSLATE_API_KEY, model="meta-llama/llama
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 llm = ChatGroq(api_key=GROQ_API_KEY, model="meta-llama/llama-4-maverick-17b-128e-instruct")
 
-# ------------------------------------
-# 7. Build Retrieval-QA Chain
-# ------------------------------------
+# Build Retrieval-QA Chain
 embeddings = HuggingFaceEmbeddings(
     model_name="BAAI/bge-small-en-v1.5",
     model_kwargs={"device": "cuda" if torch.cuda.is_available() else "cpu"},
@@ -38,7 +32,6 @@ retriever = vectordb.as_retriever(
         "lambda_mult": 0.5
     }
 )
-# retriever = vectordb.as_retriever(search_kwargs={"k": 10})
 
 combine_prompt = ChatPromptTemplate.from_messages([
     ("system",
@@ -98,7 +91,6 @@ def detect_and_translate_question(user_input: str):
     )
     resp = llm_translate.invoke(prompt)
     result = resp.content.strip()
-    # Try to parse
     lang_code = "english"
     translation = user_input
     try:
@@ -109,7 +101,6 @@ def detect_and_translate_question(user_input: str):
             elif line.startswith("TRANSLATION:"):
                 translation = line.split(":",1)[1].strip()
     except Exception as e:
-        # fallback if parsing fails
         lang_code = "english"
         translation = user_input
     return lang_code, translation
@@ -137,9 +128,7 @@ def ask_user(user_input: str) -> str:
 
     return answer
 
-# ------------------------------------
-# 9. Chat loop (Terminal-based)
-# ------------------------------------
+# Chat loop for testing (Terminal-based)
 if __name__ == "__main__":
     print("\n Multilingual Chatbot is ready!")
     print("Type your question (type 'exit' to quit)\n")
