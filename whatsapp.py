@@ -32,7 +32,7 @@ def process_webhook(data):
         for change in entry.get("changes", []):
             value = change.get("value", {})
 
-            # 🔥 Ignore delivery/read receipts (prevents duplicates)
+            # Ignore delivery/read receipts (prevents duplicates)
             if "messages" not in value:
                 continue
 
