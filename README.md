@@ -88,6 +88,3 @@ The server will start on `http://0.0.0.0:5000`.
 -   `data/`: Directory to store your knowledge base documents.
 -   `vector_store/`: Directory where ChromaDB stores embeddings.
 
-## License
-
-[MIT](LICENSE)
