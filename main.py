@@ -35,7 +35,6 @@ retriever = vectordb.as_retriever(
 
 combine_prompt = ChatPromptTemplate.from_messages([
     ("system",
-     "You are VIDYA, a campus helpdesk AI for IIIT Vadodara. "
      "You must answer strictly using the provided context below. "
      "If the answer is clearly stated in the context, quote it directly. "
      "If it's not present, clearly say: 'My database does not contain this information.' "
@@ -67,7 +66,6 @@ def my_combine_docs_run(inputs: dict) -> str:
         context_text += f"Document {i+1}:\n{doc.page_content}\n\n"
 
     prompt_text = (
-        "You are VIDYA, a campus helpdesk AI for IIIT Vadodara.\n"
         "answer based on context"
         "Context:\n"
         f"{context_text}\n\n"
